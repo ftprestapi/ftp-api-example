@@ -1,0 +1,74 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" 
+                access="global" 
+                controller="FTPWebServiceCompCtrl">
+	<!--attribute-->
+    <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    <aura:attribute name="oFTPResponseWrapper" type="FTPResponseWrapper"/>
+    
+    <!--handler-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>	
+    
+    <!--Markup-->
+    <aura:if isTrue="{!v.showSpinner}">
+    	<div>
+        	<lightning:spinner alternativeText="Loading" size="large" />
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.oFTPResponseWrapper != null}">
+        <div class="{!(v.oFTPResponseWrapper.Status == 'ERROR'?'slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error':'slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success')}" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <span class="{!(v.oFTPResponseWrapper.Status == 'ERROR'?'slds-icon_container slds-icon-utility-error slds-m-right_x-small':'slds-icon_container slds-icon-utility-user slds-m-right_x-small')}">
+                <lightning:icon iconName="{!(v.oFTPResponseWrapper.Status == 'ERROR'?'utility:error':'utility:upload')}" size="small" variant="inverse"/>
+            </span>
+            <h2>{!v.oFTPResponseWrapper.message}</h2>
+            <div class="slds-notify__close"></div>
+        </div>
+        
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-m-top_medium">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="File Name">File Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Path">Path</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Message">Message</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Status">Status</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Code">Code</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.oFTPResponseWrapper.files}" var="oFileWrapper">
+                    <tr class="{!(oFileWrapper.Status=='ERROR'?'slds-hint-parent has-error':'slds-hint-parent')}">
+                        <th data-label="File Name" scope="row">
+                            <div class="slds-truncate" title="{!oFileWrapper.fileName}">
+								{!oFileWrapper.fileName}
+                            </div>
+                        </th>
+                        <td data-label="Path">
+                            <div class="slds-truncate" title="{!oFileWrapper.path}">{!oFileWrapper.path}</div>
+                        </td>
+                        <td data-label="Message">
+                            <div class="slds-truncate" title="{!oFileWrapper.message}">{!oFileWrapper.message}</div>
+                        </td>
+                        <td data-label="Status">
+                            <div class="slds-truncate" title="{!oFileWrapper.Status}">{!oFileWrapper.Status}</div>
+                        </td>
+                        <td data-label="Code">
+                            <div class="slds-truncate" title="{!oFileWrapper.code}">{!oFileWrapper.code}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+        
+    </aura:if>
+</aura:component>

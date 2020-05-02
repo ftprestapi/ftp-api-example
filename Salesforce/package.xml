@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>FTPFileResponseWrapper</members>
+        <members>FTPResponseWrapper</members>
+        <members>FTPWebService</members>
+        <members>FTPWebServiceCompCtrl</members>
+        <members>FTPWebServiceExample</members>
+        <members>FTPWebServiceUtility</members>
+        <members>FileTransferWrapper</members>
+        <members>FileWrapper</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>FTP_DeleteFiles</members>
+        <members>FTP_DownloadAllFiles</members>
+        <members>FTP_DownloadSpecifiedFiles</members>
+        <members>FTP_TransferFiles</members>
+        <members>FTP_UploadFile</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>FTP_Web_Service_Configuration__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Account.FTP_Delete_Files</members>
+        <members>Account.FTP_Download_All_Files</members>
+        <members>Account.FTP_Download_Specified_Files</members>
+        <members>Account.FTP_Transfer_File_One_FTP_to_Other_FTP</members>
+        <members>Account.FTP_Upload_File</members>
+        <name>QuickAction</name>
+    </types>
+    <version>39.0</version>
+</Package>
