@@ -1,8 +1,9 @@
 public class FTPFileResponseWrapper {
-	@AuraEnabled public String fileName;
-    @AuraEnabled public String path;
+	@AuraEnabled public String FileName;
+    @AuraEnabled public String Path;
     @AuraEnabled public String body;
+    @AuraEnabled public Long LastModifiedDateTime;
     @AuraEnabled public String Status;
-    @AuraEnabled public String message;
-    @AuraEnabled public String code;
+    @AuraEnabled public String Message;
+    @AuraEnabled public String Code;
 }

@@ -8,7 +8,11 @@ public class FTPWebServiceExample {
         String endpoint = FTPWebServiceUtility.FTP_WebServiceEndpoint+'upload'; 
         HttpResponse response = FTPWebService.uploadFileOnFTPServer(endpoint, 'POST', JSON.serialize(lstFileWrapper));
         if(response != null){
-            return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+            if(response.getStatusCode() == 200){
+                return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+            }else{
+                return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
+            }
         }else{
             return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', 0);
         }
@@ -18,10 +22,15 @@ public class FTPWebServiceExample {
         String endpoint = FTPWebServiceUtility.FTP_WebServiceEndpoint+'download';
         HttpResponse response = FTPWebService.fileExportFromFTPServer(endpoint, 'GET', null, parentId);
         if(response != null){
-            FTPResponseWrapper oFTPResponseWrapper = (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
-            List<Attachment> lstAttachment = FTPWebServiceUtility.createAttachments(oFTPResponseWrapper.files, parentId);
-            if(lstAttachment.size()>0){ insert lstAttachment;}
-            return oFTPResponseWrapper;
+            system.debug('==response=='+response.getBody());
+            if(response.getStatusCode() == 200){
+                FTPResponseWrapper oFTPResponseWrapper = (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+                List<Attachment> lstAttachment = FTPWebServiceUtility.createAttachments(oFTPResponseWrapper.Files, parentId);
+                if(lstAttachment.size()>0){ insert lstAttachment;}
+                return oFTPResponseWrapper;
+            }else{
+                return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
+            }
         }else{
             return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', 0);
         }
@@ -39,10 +48,14 @@ public class FTPWebServiceExample {
         String endpoint = FTPWebServiceUtility.FTP_WebServiceEndpoint+'download';
         HttpResponse response = FTPWebService.fileExportFromFTPServer(endpoint, 'POST', JSON.serialize(lstFileWrapper), parentId);
         if(response != null){
-            FTPResponseWrapper oFTPResponseWrapper = (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
-            List<Attachment> lstAttachment = FTPWebServiceUtility.createAttachments(oFTPResponseWrapper.files, parentId);
-            if(lstAttachment.size()>0){ insert lstAttachment;}
-            return oFTPResponseWrapper;
+            if(response.getStatusCode() == 200){
+                FTPResponseWrapper oFTPResponseWrapper = (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+                List<Attachment> lstAttachment = FTPWebServiceUtility.createAttachments(oFTPResponseWrapper.Files, parentId);
+                if(lstAttachment.size()>0){ insert lstAttachment;}
+                return oFTPResponseWrapper;
+            }else{
+                return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
+            }
         }else{
             return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', 0);
         }
@@ -60,7 +73,11 @@ public class FTPWebServiceExample {
         String endpoint = FTPWebServiceUtility.FTP_WebServiceEndpoint+'transfer'; 
         HttpResponse response = FTPWebService.transferFiles(endpoint, 'POST', JSON.serialize(lstFileTransferWrapper));
         if(response != null){
-            return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+            if(response.getStatusCode() == 200){
+                return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+            }else{
+                return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
+            }
         }else{
             return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', 0);
         }

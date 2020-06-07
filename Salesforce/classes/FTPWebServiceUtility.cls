@@ -1,6 +1,6 @@
 public class FTPWebServiceUtility {
     
-    public static String FTP_WebServiceEndpoint = 'https://ftp-api.herokuapp.com/ftp/';
+    public static String FTP_WebServiceEndpoint = 'https://ftp-api-3.herokuapp.com/ftp/';
     
     public static FTP_Web_Service_Configuration__c oSourceFtpWebServiceConfig{
         get{
@@ -59,8 +59,8 @@ public class FTPWebServiceUtility {
     public static FTPResponseWrapper getFTPResponseWrapper(String status, String message, Integer code){
         FTPResponseWrapper oWrapper = new FTPResponseWrapper();
         oWrapper.Status = status;
-        oWrapper.message = message;
-        oWrapper.code = code;
+        oWrapper.Message = message;
+        oWrapper.Code = code;
         return oWrapper;
     }
     

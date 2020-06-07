@@ -7,7 +7,7 @@
             if (state === "SUCCESS") {
                 let result = response.getReturnValue();
                 component.set("v.oFTPResponseWrapper", result);
-                this.showToastMessage(component, event, 'Success', "File Transfered Successfully!", 'success');
+                //this.showToastMessage(component, event, 'Success', "File Transfered Successfully!", 'success');
             }else if (state === "ERROR") {
                 var errors = response.getError();
                 if (errors) {

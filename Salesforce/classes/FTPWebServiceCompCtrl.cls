@@ -14,8 +14,10 @@ public class FTPWebServiceCompCtrl {
         try{
             return FTPWebServiceExample.downloadAllFiles(recordId);
         }catch(DMLException dmlex){
+            system.debug('==Exception=='+dmlex.getDMLMessage(0)+dmlex.getStackTraceString());
             throw new AuraException(dmlex.getDMLMessage(0));
         }catch(Exception ex){
+            system.debug('==Exception=='+ex.getMessage()+ex.getStackTraceString());
             throw new AuraException(ex.getMessage());
         }
     }

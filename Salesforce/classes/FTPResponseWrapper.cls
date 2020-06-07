@@ -1,6 +1,6 @@
 public class FTPResponseWrapper {
     @AuraEnabled public String Status;
-    @AuraEnabled public String message;
-    @AuraEnabled public Integer code;
-    @AuraEnabled public List<FTPFileResponseWrapper> files;
+    @AuraEnabled public String Message;
+    @AuraEnabled public Integer Code;
+    @AuraEnabled public List<FTPFileResponseWrapper> Files;
 }
