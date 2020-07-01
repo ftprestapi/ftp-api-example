@@ -1,6 +1,6 @@
 public class FTPWebServiceUtility {
     
-    public static String FTP_WebServiceEndpoint = 'https://ftp-api-3.herokuapp.com/ftp/';
+    public static String FTP_WebServiceEndpoint = 'https://www.ftp-api.com/ftp/';
     
     public static FTP_Web_Service_Configuration__c oSourceFtpWebServiceConfig{
         get{
@@ -24,7 +24,7 @@ public class FTPWebServiceUtility {
     
     public static FTP_Web_Service_Configuration__c getFTPWebServiceConfiguration(Boolean isTargetEnvironment){
         FTP_Web_Service_Configuration__c oWebServiceConfiguration = new FTP_Web_Service_Configuration__c();
-        String sSOQL = 'SELECT Id, Host__c, Username__c, Password__c, Port__c';
+        String sSOQL = 'SELECT Id, Host__c, Username__c, Password__c, Port__c, Source__c';
         sSOQL += ' FROM FTP_Web_Service_Configuration__c';
         sSOQL += ' WHERE IsActive__c = true';
         if(isTargetEnvironment){

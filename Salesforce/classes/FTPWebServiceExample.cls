@@ -10,6 +10,8 @@ public class FTPWebServiceExample {
         if(response != null){
             if(response.getStatusCode() == 200){
                 return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+            }else if(response.getStatusCode() == 400){
+            	return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
             }else{
                 return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
             }
@@ -28,6 +30,8 @@ public class FTPWebServiceExample {
                 List<Attachment> lstAttachment = FTPWebServiceUtility.createAttachments(oFTPResponseWrapper.Files, parentId);
                 if(lstAttachment.size()>0){ insert lstAttachment;}
                 return oFTPResponseWrapper;
+            }else if(response.getStatusCode() == 400){
+            	return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
             }else{
                 return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
             }
@@ -53,6 +57,8 @@ public class FTPWebServiceExample {
                 List<Attachment> lstAttachment = FTPWebServiceUtility.createAttachments(oFTPResponseWrapper.Files, parentId);
                 if(lstAttachment.size()>0){ insert lstAttachment;}
                 return oFTPResponseWrapper;
+            }else if(response.getStatusCode() == 400){
+            	return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
             }else{
                 return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
             }
@@ -64,17 +70,19 @@ public class FTPWebServiceExample {
     public static FTPResponseWrapper transferFiles(){
         List<FileTransferWrapper> lstFileTransferWrapper = new List<FileTransferWrapper>();
         //lstFileTransferWrapper.add(new FileWrapper(Source File Name, Source Path, Target File Name, Target Path));
-        lstFileTransferWrapper.add(new FileTransferWrapper('Test.csv','/tmp', 'attachmentTest.csv', '/tmp'));
-        lstFileTransferWrapper.add(new FileTransferWrapper('Test.xml','/tmp','Test.xml', '/tmp'));
-        lstFileTransferWrapper.add(new FileTransferWrapper('Test.xlsx','/tmp','Test.xlsx', '/tmp'));
-        lstFileTransferWrapper.add(new FileTransferWrapper('Test.pdf','/tmp', 'Test.pdf', '/tmp'));
-        lstFileTransferWrapper.add(new FileTransferWrapper('Test.jpg','/tmp', 'Test.jpg', '/tmp'));
+        lstFileTransferWrapper.add(new FileTransferWrapper('Test.csv','/tmp', 'attachmentTest.csv', '/temp1'));
+        lstFileTransferWrapper.add(new FileTransferWrapper('Test.xml','/tmp','Test.xml', '/temp1'));
+        lstFileTransferWrapper.add(new FileTransferWrapper('Test.xlsx','/tmp','Test.xlsx', '/temp1'));
+        lstFileTransferWrapper.add(new FileTransferWrapper('Test.pdf','/tmp', 'Test.pdf', '/temp1'));
+        lstFileTransferWrapper.add(new FileTransferWrapper('Test.jpg','/tmp', 'Test.jpg', '/temp1'));
         
         String endpoint = FTPWebServiceUtility.FTP_WebServiceEndpoint+'transfer'; 
         HttpResponse response = FTPWebService.transferFiles(endpoint, 'POST', JSON.serialize(lstFileTransferWrapper));
         if(response != null){
             if(response.getStatusCode() == 200){
                 return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
+            }else if(response.getStatusCode() == 400){
+            	return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
             }else{
                 return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
             }
@@ -86,15 +94,15 @@ public class FTPWebServiceExample {
     public static FTPResponseWrapper deleteFiles(Id ParentId){
         List<FileWrapper> lstFileWrapper = new List<FileWrapper>();
         for(Attachment oAttachment : [SELECT Id, Name FROM Attachment Where ParentId=:parentId]){
-            lstFileWrapper.add(new FileWrapper(oAttachment.Name, '/tmp', null));
+            lstFileWrapper.add(new FileWrapper(oAttachment.Name, '/tmp', null)); 
         }
         String endpoint = FTPWebServiceUtility.FTP_WebServiceEndpoint+'delete';
         HttpResponse response = FTPWebService.deleteFiles(endpoint, 'DELETE', JSON.serialize(lstFileWrapper));
-        system.debug('==response=='+response);
         if(response != null){
-            system.debug('==response==body=='+response.getBody());
             if(response.getStatusCode() == 200){
             	return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);    
+            }else if(response.getStatusCode() == 400){
+            	return (FTPResponseWrapper)JSON.deserialize(response.getBody(), FTPResponseWrapper.class);
             }else{
                 return FTPWebServiceUtility.getFTPResponseWrapper('ERROR', 'Callout Failed!', response.getStatusCode());
             }

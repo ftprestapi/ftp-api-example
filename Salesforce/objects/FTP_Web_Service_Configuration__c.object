@@ -57,6 +57,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Source__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Source should be FTP or SFTP</inlineHelpText>
+        <label>Source</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Username__c</fullName>
         <externalId>false</externalId>
         <label>Username</label>
@@ -72,10 +83,10 @@
         <columns>NAME</columns>
         <columns>Host__c</columns>
         <columns>Username__c</columns>
-        <columns>Password__c</columns>
         <columns>Port__c</columns>
         <columns>IsSourceEnvironment__c</columns>
         <columns>IsTargetEnvironment__c</columns>
+        <columns>Source__c</columns>
         <columns>IsActive__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
