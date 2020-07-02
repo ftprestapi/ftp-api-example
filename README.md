@@ -1,4 +1,4 @@
-# [FTP API](https://ftp-api.herokuapp.com/)
+# [FTP API](https://www.ftp-api.com/)
 
 In this tutorial, we will see how we can directly communicate with FTP server using REST API. It solve's problem like using FTP server from salesforce or other platforms using http callouts.
 
@@ -14,7 +14,7 @@ This API allow us to upload files on FTP Server. User can upload single or multi
 
 ```
 HTTP Request
-POST https://ftp-api.herokuapp.com/ftp/upload
+POST https://www.ftp-api.com/ftp/upload
 ```
 
 ![alt text](https://github.com/ftprestapi/ftp-api-example/raw/master/images/upload.png "Upload")
@@ -25,7 +25,7 @@ This API allow to delete files on FTP server. Specify the files to be deleted, b
 
 ```
 HTTP Request
-DELETE https://ftp-api.herokuapp.com/ftp/delete
+DELETE https://www.ftp-api.com/ftp/delete
 ```
 
 ![alt text](https://github.com/ftprestapi/ftp-api-example/raw/master/images/delete.png "Delete")
@@ -40,7 +40,7 @@ Second, the user can specify the files which are needed, so the API will return 
 
 ```
 HTTP Request
-GET https://ftp-api.herokuapp.com/ftp/download
+GET https://www.ftp-api.com/ftp/download
 ```
 
 ![alt text](https://github.com/ftprestapi/ftp-api-example/raw/master/images/download.png "Download")
@@ -53,7 +53,7 @@ Note: This API requires both source and destination FTP server authentication.
 
 ```
 HTTP Request
-POST https://ftp-api.herokuapp.com/ftp/transfer
+POST https://www.ftp-api.com/ftp/transfer
 ```
 
 ![alt text](https://github.com/ftprestapi/ftp-api-example/raw/master/images/transfer.png "Transfer")
